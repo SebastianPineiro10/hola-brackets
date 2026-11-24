@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <meta name="theme-color" content="#0ca9a5">
+
+  <title>Transferencia bancaria | HOLA BRACKETS!</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /* =====================================
+       COLORES
+    ===================================== */
+
+    :root {
+      --azul: #253f5b;
+      --azul-oscuro: #152e4c;
+      --turquesa: #0ca9a5;
+      --turquesa-oscuro: #087d7c;
+      --blanco: #ffffff;
+      --negro: #17212b;
+      --gris: #f2f7f9;
+      --borde: #dce8ed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      min-height: 100%;
+    }
+
+    /* =====================================
+       FONDO PRINCIPAL
+    ===================================== */
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 25px 14px;
+
+      font-family: "DM Sans", sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 12% 12%,
+          rgba(12, 169, 165, 0.20),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(37, 63, 91, 0.13),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #e8faf8 0%,
+          #ffffff 50%,
+          #e8f0fa 100%
+        );
+    }
+
+    /* =====================================
+       CONTENEDOR
+    ===================================== */
+
+    .contenedor {
+      width: 100%;
+      max-width: 470px;
+      margin: auto;
+    }
+
+    /* =====================================
+       LOGOTIPO SIN RECUADRO
+    ===================================== */
+
+    .logo {
+      width: min(100%, 310px);
+
+      margin: 0 auto 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: transparent;
+
+      border: none;
+      border-radius: 0;
+
+      box-shadow: none;
+
+      padding: 0;
+    }
+
+    .logo img {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      object-fit: contain;
+
+      background: transparent;
+
+      border: none;
+      border-radius: 0;
+
+      box-shadow: none;
+    }
+
+    /* =====================================
+       TARJETA PRINCIPAL
+    ===================================== */
+
+    .tarjeta {
+      width: 100%;
+
+      background: var(--blanco);
+
+      padding: 28px 25px 32px;
+
+      border: 1px solid var(--borde);
+      border-radius: 26px;
+
+      box-shadow:
+        0 20px 55px rgba(37, 63, 91, 0.12),
+        0 5px 15px rgba(37, 63, 91, 0.05);
+    }
+
+    /* =====================================
+       TÍTULO
+    ===================================== */
+
+    h1 {
+      font-family: "Outfit", sans-serif;
+
+      font-size: 27px;
+      font-weight: 700;
+
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+
+      color: var(--azul-oscuro);
+
+      text-align: center;
+
+      margin-bottom: 14px;
+    }
+
+    .subrayado {
+      width: 90px;
+      height: 5px;
+
+      margin: 0 auto 30px;
+
+      background: var(--turquesa);
+      border-radius: 10px;
+    }
+
+    /* =====================================
+       CAMPOS BANCARIOS
+    ===================================== */
+
+    .campo {
+      margin-bottom: 21px;
+    }
+
+    .campo:last-child {
+      margin-bottom: 0;
+    }
+
+    .etiqueta {
+      display: block;
+
+      margin-bottom: 9px;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      color: var(--negro);
+    }
+
+    .dato {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      min-height: 59px;
+
+      padding: 9px 10px 9px 15px;
+
+      background: var(--gris);
+
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+
+      transition: border-color 0.2s;
+    }
+
+    .dato:focus-within {
+      border-color: var(--turquesa);
+    }
+
+    .valor {
+      flex: 1;
+      min-width: 0;
+
+      font-size: 16px;
+      font-weight: 700;
+
+      color: var(--azul-oscuro);
+
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+
+      user-select: all;
+      -webkit-user-select: all;
+    }
+
+    /* =====================================
+       BOTONES COPIAR
+    ===================================== */
+
+    .copiar {
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      min-width: 88px;
+      min-height: 44px;
+
+      padding: 10px 12px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: var(--azul);
+      color: var(--blanco);
+
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s,
+        transform 0.2s;
+    }
+
+    .copiar:hover {
+      background: var(--azul-oscuro);
+    }
+
+    .copiar:active {
+      transform: scale(0.97);
+    }
+
+    .copiar.copiado {
+      background: var(--turquesa-oscuro);
+    }
+
+    .copiar:focus-visible {
+      outline: 3px solid var(--turquesa);
+      outline-offset: 3px;
+    }
+
+    .copiar svg {
+      width: 15px;
+      height: 15px;
+
+      fill: none;
+      stroke: currentColor;
+
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* =====================================
+       RESPONSIVE PARA CELULARES
+    ===================================== */
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 10px;
+      }
+
+      .logo {
+        width: min(100%, 280px);
+        margin-bottom: 17px;
+      }
+
+      .tarjeta {
+        padding: 23px 16px 27px;
+        border-radius: 21px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .subrayado {
+        margin-bottom: 23px;
+      }
+
+      .campo {
+        margin-bottom: 17px;
+      }
+
+      .valor {
+        font-size: 15px;
+      }
+
+      .copiar {
+        min-width: 78px;
+        padding: 9px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .tarjeta {
+        padding: 18px 12px;
+      }
+
+      .dato {
+        gap: 6px;
+        padding-left: 10px;
+      }
+
+      .valor {
+        font-size: 13px;
+      }
+
+      .copiar {
+        min-width: 70px;
+        font-size: 11px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-height: 680px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .contenedor {
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="contenedor">
+
+    <!-- =====================================
+         LOGO SIN RECUADRO
+    ===================================== -->
+
+    <div class="logo">
+      <img
+        src="./logo.png"
+        alt="HOLA BRACKETS! Consultorio dental"
+      >
+    </div>
+
+    <!-- =====================================
+         TARJETA DE TRANSFERENCIA
+    ===================================== -->
+
+    <section class="tarjeta">
+
+      <h1>Transferencia bancaria</h1>
+
+      <div class="subrayado"></div>
+
+      <!-- BANCO -->
+
+      <div class="campo">
+
+        <span class="etiqueta">
+          Banco
+        </span>
+
+        <div class="dato">
+
+          <span class="valor" id="banco">
+            BBVA
+          </span>
+
+          <button
+            class="copiar"
+            type="button"
+            aria-label="Copiar banco"
+            onclick="copiarDato('banco', this)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect
+                x="8" y="8"
+                width="12" height="12"
+                rx="2"
+              />
+              <path
+                d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"
+              />
+            </svg>
+            <span>Copiar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- TITULAR -->
+
+      <div class="campo">
+
+        <span class="etiqueta">
+          Nombre del titular
+        </span>
+
+        <div class="dato">
+
+          <span class="valor" id="titular">
+            Laura Janeth Marmolejo Garza
+          </span>
+
+          <button
+            class="copiar"
+            type="button"
+            aria-label="Copiar titular"
+            onclick="copiarDato('titular', this)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect
+                x="8" y="8"
+                width="12" height="12"
+                rx="2"
+              />
+              <path
+                d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"
+              />
+            </svg>
+            <span>Copiar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- NÚMERO DE CUENTA -->
+
+      <div class="campo">
+
+        <span class="etiqueta">
+          Número de cuenta
+        </span>
+
+        <div class="dato">
+
+          <span class="valor" id="cuenta">
+            0483014940
+          </span>
+
+          <button
+            class="copiar"
+            type="button"
+            aria-label="Copiar número de cuenta"
+            onclick="copiarDato('cuenta', this)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect
+                x="8" y="8"
+                width="12" height="12"
+                rx="2"
+              />
+              <path
+                d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"
+              />
+            </svg>
+            <span>Copiar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- CLABE INTERBANCARIA -->
+
+      <div class="campo">
+
+        <span class="etiqueta">
+          CLABE interbancaria
+        </span>
+
+        <div class="dato">
+
+          <span class="valor" id="clabe">
+            012164004830149401
+          </span>
+
+          <button
+            class="copiar"
+            type="button"
+            aria-label="Copiar CLABE interbancaria"
+            onclick="copiarDato('clabe', this)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect
+                x="8" y="8"
+                width="12" height="12"
+                rx="2"
+              />
+              <path
+                d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"
+              />
+            </svg>
+            <span>Copiar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =====================================
+       JAVASCRIPT
+  ===================================== -->
+
+  <script>
+    async function copiarDato(id, boton) {
+
+      const elemento = document.getElementById(id);
+
+      if (!elemento) {
+        return;
+      }
+
+      let valor = elemento.textContent.trim();
+
+      // Conservar los números sin espacios.
+      if (id === 'cuenta' || id === 'clabe') {
+        valor = valor.replace(/\s/g, '');
+      }
+
+      // Validación básica de CLABE.
+      if (
+        id === 'clabe' &&
+        !/^\d{18}$/.test(valor)
+      ) {
+        alert('La CLABE debe contener 18 dígitos.');
+        return;
+      }
+
+      const texto = boton.querySelector('span');
+
+      try {
+
+        await navigator.clipboard.writeText(valor);
+
+        texto.textContent = '¡Listo!';
+        boton.classList.add('copiado');
+
+        setTimeout(() => {
+          texto.textContent = 'Copiar';
+          boton.classList.remove('copiado');
+        }, 1800);
+
+      } catch (error) {
+
+        alert(
+          'No se pudo copiar. Selecciona el dato manualmente.'
+        );
+
+      }
+    }
+  </script>
+
+</body>
+</html>
